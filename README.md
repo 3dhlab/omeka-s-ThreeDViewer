@@ -28,14 +28,12 @@ This module allows users to view and interact with 3D models (STL and GLB files)
 
 ### Manual Installation
 
-1. Download the latest release from the GitHub repository
-2. Extract the zip file to your Omeka S `modules` directory
-3. Log in to the Omeka S admin panel and navigate to Modules
-5. Click "Install" next to Three3DViewer
+1. Download the `ThreeDViewer-<version>.zip` asset from the [upstream releases](https://github.com/ateeducacion/omeka-s-ThreeDViewer/releases).
+2. Extract the ZIP into your Omeka S `modules` directory. The module files must be directly inside `modules/ThreeDViewer`, with `Module.php` at `modules/ThreeDViewer/Module.php`.
+3. Log in to the Omeka S admin panel as a Global Administrator and navigate to Modules.
+4. Click "Install" next to ThreeDViewer.
 
-## Installation
-
-See general end user documentation for [Installing a module](http://omeka.org/s/docs/user-manual/modules/#installing-modules)
+See the Omeka S user manual for more on [installing modules](https://omeka.org/s/docs/user-manual/modules/#installing-modules).
 
 ## Usage
 
@@ -63,11 +61,11 @@ Then open [http://localhost:8080](http://localhost:8080).
 
 ### Sample data import
 
-On first boot, the container automatically installs CSVImport and, if `data/sample_3d_data.csv` is present, imports it so you immediately have items to test the viewer. To trigger a manual import inside the container, run:
+On first boot, the container automatically installs CSVImport and imports `data/sample_data.csv`. The post-configuration command also imports `data/sample_3d_data.csv` once, using a marker in the persistent volume to skip that import on later starts. To manually import the 3D sample data inside the container, run:
 
-```
+```sh
 make shell
-cd /var/www/html && OMEKA_CSV_IMPORT_FILE=/data/sample_3d_data.csv php import_cli.php "$OMEKA_CSV_IMPORT_FILE"
+cd /var/www/html && php import_cli.php /data/sample_3d_data.csv
 ```
 
 ### Preconfigured users
